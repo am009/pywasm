@@ -1,0 +1,8 @@
+{
+    "global": {
+        "index": 2,
+        "type": "i32",
+        "range": "lambdax:x<0 and x<256",
+        "name": "aint"
+    }
+}
