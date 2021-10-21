@@ -14,3 +14,6 @@ class Option:
         self.cycle = 0
         # Memory page limit. 1 page = 65536 bytes
         self.pages_limit = 0
+        # safe runtime profile
+        self.user_rule = None
+        self._safe_rule = None

@@ -1042,6 +1042,7 @@ class Module:
         self.start: typing.Optional[StartFunction] = None
         self.import_list: typing.List[Import] = []
         self.export_list: typing.List[Export] = []
+        self.dwarf_info = None
 
     def __repr__(self):
         return f'module({self.section_list})'
@@ -1155,5 +1156,48 @@ class Module:
             raise Exception('pywasm: function and code section have inconsistent lengths')
         if r.read(1):
             raise Exception('pywasm: junk after last section')
+        
+        mod.dwarf_info = cls.decode_dwarf_info(mod)
 
         return mod
+
+    @staticmethod
+    def decode_dwarf_info(mod):
+        from elftools.dwarf.dwarfinfo import DWARFInfo, DwarfConfig, DebugSectionDescriptor 
+        section_names = ('.debug_info', '.debug_aranges', '.debug_abbrev',
+                '.debug_str', '.debug_line', '.debug_frame',
+                '.debug_loc', '.debug_ranges', '.debug_pubtypes',
+                '.debug_pubnames', '.debug_addr', '.debug_str_offsets')
+        data = {i: None for i in section_names}
+        for section in mod.section_list:
+            if isinstance(section, CustomSection) and (sec_name := section.custom.name) in section_names:
+                sec_data = section.custom.data
+                stream = io.BytesIO(sec_data)
+                data[sec_name] = DebugSectionDescriptor(stream, sec_name, 0, len(sec_data), 0)
+        (debug_info_sec_name, debug_aranges_sec_name, debug_abbrev_sec_name,
+            debug_str_sec_name, debug_line_sec_name, debug_frame_sec_name,
+            debug_loc_sec_name, debug_ranges_sec_name, debug_pubtypes_name,
+            debug_pubnames_name, debug_addr_name, debug_str_offsets_name) = section_names
+        
+        if data[debug_info_sec_name] is None:
+            log.println("Warning: No debug info in module.")
+            return None
+
+        return DWARFInfo(config=DwarfConfig(
+                            little_endian=True,
+                            default_address_size=4,
+                            machine_arch='wasm'),
+                        debug_info_sec=data[debug_info_sec_name],
+                        debug_aranges_sec=data[debug_aranges_sec_name],
+                        debug_abbrev_sec=data[debug_abbrev_sec_name],
+                        debug_frame_sec=data[debug_frame_sec_name],
+                        eh_frame_sec=None,
+                        debug_str_sec=data[debug_str_sec_name],
+                        debug_loc_sec=data[debug_loc_sec_name],
+                        debug_ranges_sec=data[debug_ranges_sec_name],
+                        debug_line_sec=data[debug_line_sec_name],
+                        debug_pubtypes_sec=data[debug_pubtypes_name],
+                        debug_pubnames_sec=data[debug_pubnames_name],
+                        # debug_addr_sec=data[debug_addr_name],
+                        # debug_str_offsets_sec=data[debug_str_offsets_name],
+                        )

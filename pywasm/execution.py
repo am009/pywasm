@@ -8,6 +8,7 @@ from . import instruction
 from . import log
 from . import num
 from . import option
+from . import safety
 
 # ======================================================================================================================
 # Execution Runtime Structure
@@ -442,6 +443,7 @@ class Configuration:
         self.depth = 0
         self.pc = 0
         self.opts: option.Option = option.Option()
+        self.parent_conf: typing.Optional[Frame] = None
 
     def get_label(self, i: int) -> Label:
         l = self.stack.len()
@@ -477,7 +479,7 @@ class Configuration:
             self.set_frame(frame)
             return self.exec()
         if isinstance(function, HostFunc):
-            r = function.hostcode(self.store, *[e.val() for e in function_args])
+            r = function.hostcode(self, *[e.val() for e in function_args])
             l = len(function.type.rets.data)
             if l == 0:
                 return Result([])
@@ -654,6 +656,7 @@ class ArithmeticLogicUnit:
         subcnf = Configuration(config.store)
         subcnf.depth = config.depth + 1
         subcnf.opts = config.opts
+        subcnf.parent_conf = config
         r = subcnf.call(function_addr, function_args)
         for e in r.data:
             config.stack.append(e)
@@ -816,6 +819,7 @@ class ArithmeticLogicUnit:
         if addr < 0 or addr + size > len(memory.data):
             raise Exception('pywasm: out of bounds memory access')
         memory.data[addr:addr + size] = r.data[0:size]
+        safety.post_memory_store(config.opts._safe_rule, memory, addr, addr+size)
 
     @staticmethod
     def i32_store(config: Configuration, i: binary.Instruction):
@@ -1966,6 +1970,8 @@ class Machine:
     def instantiate(self, module: binary.Module, extern_value_list: typing.List[ExternValue]):
         self.module.type_list = module.type_list
 
+        if self.opts.user_rule is not None:
+            self.opts._safe_rule = safety.convert_user_rule(module, self.opts.user_rule)
         # [TODO] If module is not valid, then panic
 
         # Assert: module is valid with external types classifying its imports
@@ -2044,6 +2050,12 @@ class Machine:
             memory_addr = self.module.memory_addr_list[data_segment.memory_index]
             memory_instance = self.store.memory_list[memory_addr]
             memory_instance.data[offset: offset + len(data_segment.init)] = data_segment.init
+        else:
+            memory_instance = self.store.memory_list[self.module.memory_addr_list[0]]
+
+        # post memory init
+        if self.opts._safe_rule is not None:
+            safety.post_memory_store(self.opts._safe_rule, memory_instance, -1, -1, is_init=True)
 
         # [TODO] Assert: due to validation, the frame F is now on the top of the stack.
 

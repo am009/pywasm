@@ -1,6 +1,6 @@
 {
     "global": [{
-        "location": { "name": "aint" },
+        "location": { "name": "b" },
         "check_func": "lambda x:x>0 and x < 256"
     }]
 }
