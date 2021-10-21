@@ -1,0 +1,122 @@
+Section ID: 1
+Section ID: 2
+Section ID: 3
+Section ID: 4
+Section ID: 5
+Section ID: 6
+Section ID: 7
+Section ID: 9
+Section ID: 10
+Custom Section: name
+Custom Section: .debug_info
+Custom Section: .debug_loc
+Custom Section: .debug_ranges
+Custom Section: .debug_abbrev
+Custom Section: .debug_line
+Custom Section: .debug_str
+
+
+============Decode Start===============
+Found a compile unit at offset 0, length 133
+  Top DIE with tag=DW_TAG_compile_unit
+  name=/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/examples/test.c
+  DIE tag=DW_TAG_compile_unit
+    DIE tag=DW_TAG_pointer_type
+    DIE tag=DW_TAG_base_type
+    DIE tag=DW_TAG_subprogram
+      DIE tag=DW_TAG_formal_parameter
+    DIE tag=DW_TAG_subprogram
+      DIE tag=DW_TAG_variable
+    DIE tag=DW_TAG_base_type
+    DIE tag=DW_TAG_pointer_type
+    lowpc: 0x7, highpc: 0x59
+    lowpc: 0x5a, highpc: 0xb7
+  line program:
+    offset: 0x7, line: 4, name: ./test.c
+    offset: 0x32, line: 5, name: ./test.c
+    offset: 0x39, line: 5, name: ./test.c
+    offset: 0x44, line: 5, name: ./test.c
+    offset: 0x48, line: 6, name: ./test.c
+    offset: 0x59, line: 6, name: ./test.c
+    offset: 0x5a, line: 8, name: ./test.c
+    offset: 0x8d, line: 10, name: ./test.c
+    offset: 0xa0, line: 11, name: ./test.c
+    offset: 0xb7, line: 11, name: ./test.c
+Found a compile unit at offset 137, length 81
+  Top DIE with tag=DW_TAG_compile_unit
+  name=/home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c
+  DIE tag=DW_TAG_compile_unit
+    DIE tag=DW_TAG_subprogram
+      DIE tag=DW_TAG_variable
+    DIE tag=DW_TAG_base_type
+    lowpc: 0xc4, highpc: 0xd5
+  line program:
+    offset: 0xc4, line: 19, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c
+    offset: 0xc5, line: 20, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c
+    offset: 0xcc, line: 21, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c
+    offset: 0xcf, line: 29, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c
+    offset: 0xd1, line: 31, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c
+    offset: 0xd5, line: 31, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c
+Found a compile unit at offset 222, length 82
+  Top DIE with tag=DW_TAG_compile_unit
+  name=/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/_Exit.c
+  DIE tag=DW_TAG_compile_unit
+    DIE tag=DW_TAG_subprogram
+      DIE tag=DW_TAG_formal_parameter
+    DIE tag=DW_TAG_base_type
+    lowpc: 0xd6, highpc: 0xdd
+  line program:
+    offset: 0xd6, line: 5, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/_Exit.c
+    offset: 0xd7, line: 7, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/_Exit.c
+    offset: 0xdd, line: 7, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/_Exit.c
+Found a compile unit at offset 308, length 174
+  Top DIE with tag=DW_TAG_compile_unit
+  name=/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+  DIE tag=DW_TAG_compile_unit
+    DIE tag=DW_TAG_typedef
+    DIE tag=DW_TAG_base_type
+    DIE tag=DW_TAG_pointer_type
+    DIE tag=DW_TAG_pointer_type
+    DIE tag=DW_TAG_subroutine_type
+      DIE tag=DW_TAG_unspecified_parameters
+    DIE tag=DW_TAG_subprogram
+      DIE tag=DW_TAG_variable
+    DIE tag=DW_TAG_subprogram
+      DIE tag=DW_TAG_formal_parameter
+    DIE tag=DW_TAG_subprogram
+    DIE tag=DW_TAG_base_type
+    lowpc: 0xde, highpc: 0x109
+    lowpc: 0x10a, highpc: 0x117
+    lowpc: 0x0, highpc: 0x0
+  line program:
+    offset: 0xde, line: 19, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0xe9, line: 21, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0xf0, line: 22, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0xf5, line: 22, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0xfa, line: 22, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0xfd, line: 21, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0xff, line: 21, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x101, line: 21, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x102, line: 21, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x106, line: 23, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x108, line: 24, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x109, line: 24, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x10a, line: 29, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x10b, line: 30, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x10d, line: 31, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x10f, line: 32, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x111, line: 33, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+    offset: 0x117, line: 33, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c
+Found a compile unit at offset 486, length 91
+  Top DIE with tag=DW_TAG_compile_unit
+  name=/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno/__errno_location.c
+  DIE tag=DW_TAG_compile_unit
+    DIE tag=DW_TAG_variable
+    DIE tag=DW_TAG_base_type
+    DIE tag=DW_TAG_subprogram
+    DIE tag=DW_TAG_pointer_type
+    lowpc: 0x15e, highpc: 0x163
+  line program:
+    offset: 0x15e, line: 16, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno/__errno_location.c
+    offset: 0x15f, line: 17, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno/__errno_location.c
+    offset: 0x163, line: 17, name: /home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno/__errno_location.c

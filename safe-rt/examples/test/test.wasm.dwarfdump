@@ -1,0 +1,779 @@
+./test.wasm:	file format WASM
+
+.debug_abbrev contents:
+Abbrev table for offset: 0x00000000
+[1] DW_TAG_compile_unit	DW_CHILDREN_yes
+	DW_AT_producer	DW_FORM_strp
+	DW_AT_language	DW_FORM_data2
+	DW_AT_name	DW_FORM_strp
+	DW_AT_stmt_list	DW_FORM_sec_offset
+	DW_AT_comp_dir	DW_FORM_strp
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_ranges	DW_FORM_sec_offset
+
+[2] DW_TAG_pointer_type	DW_CHILDREN_no
+	DW_AT_type	DW_FORM_ref4
+
+[3] DW_TAG_base_type	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_encoding	DW_FORM_data1
+	DW_AT_byte_size	DW_FORM_data1
+
+[4] DW_TAG_subprogram	DW_CHILDREN_yes
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_prototyped	DW_FORM_flag_present
+	DW_AT_external	DW_FORM_flag_present
+
+[5] DW_TAG_formal_parameter	DW_CHILDREN_no
+	DW_AT_location	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+
+[6] DW_TAG_subprogram	DW_CHILDREN_yes
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+	DW_AT_external	DW_FORM_flag_present
+
+[7] DW_TAG_variable	DW_CHILDREN_no
+	DW_AT_location	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+
+Abbrev table for offset: 0x0000006e
+[1] DW_TAG_compile_unit	DW_CHILDREN_yes
+	DW_AT_producer	DW_FORM_strp
+	DW_AT_language	DW_FORM_data2
+	DW_AT_name	DW_FORM_strp
+	DW_AT_stmt_list	DW_FORM_sec_offset
+	DW_AT_comp_dir	DW_FORM_strp
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+
+[2] DW_TAG_subprogram	DW_CHILDREN_yes
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_GNU_all_call_sites	DW_FORM_flag_present
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_prototyped	DW_FORM_flag_present
+	DW_AT_external	DW_FORM_flag_present
+
+[3] DW_TAG_variable	DW_CHILDREN_no
+	DW_AT_location	DW_FORM_sec_offset
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+
+[4] DW_TAG_base_type	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_encoding	DW_FORM_data1
+	DW_AT_byte_size	DW_FORM_data1
+
+Abbrev table for offset: 0x000000b4
+[1] DW_TAG_compile_unit	DW_CHILDREN_yes
+	DW_AT_producer	DW_FORM_strp
+	DW_AT_language	DW_FORM_data2
+	DW_AT_name	DW_FORM_strp
+	DW_AT_stmt_list	DW_FORM_sec_offset
+	DW_AT_comp_dir	DW_FORM_strp
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+
+[2] DW_TAG_subprogram	DW_CHILDREN_yes
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_GNU_all_call_sites	DW_FORM_flag_present
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_prototyped	DW_FORM_flag_present
+	DW_AT_external	DW_FORM_flag_present
+	DW_AT_noreturn	DW_FORM_flag_present
+
+[3] DW_TAG_formal_parameter	DW_CHILDREN_no
+	DW_AT_location	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+
+[4] DW_TAG_base_type	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_encoding	DW_FORM_data1
+	DW_AT_byte_size	DW_FORM_data1
+
+Abbrev table for offset: 0x000000fd
+[1] DW_TAG_compile_unit	DW_CHILDREN_yes
+	DW_AT_producer	DW_FORM_strp
+	DW_AT_language	DW_FORM_data2
+	DW_AT_name	DW_FORM_strp
+	DW_AT_stmt_list	DW_FORM_sec_offset
+	DW_AT_comp_dir	DW_FORM_strp
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_ranges	DW_FORM_sec_offset
+
+[2] DW_TAG_typedef	DW_CHILDREN_no
+	DW_AT_type	DW_FORM_ref4
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+
+[3] DW_TAG_base_type	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_encoding	DW_FORM_data1
+	DW_AT_byte_size	DW_FORM_data1
+
+[4] DW_TAG_pointer_type	DW_CHILDREN_no
+	DW_AT_type	DW_FORM_ref4
+
+[5] DW_TAG_subroutine_type	DW_CHILDREN_yes
+
+[6] DW_TAG_unspecified_parameters	DW_CHILDREN_no
+
+[7] DW_TAG_subprogram	DW_CHILDREN_yes
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_GNU_all_call_sites	DW_FORM_flag_present
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_prototyped	DW_FORM_flag_present
+
+[8] DW_TAG_variable	DW_CHILDREN_no
+	DW_AT_location	DW_FORM_sec_offset
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+
+[9] DW_TAG_subprogram	DW_CHILDREN_yes
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_GNU_all_call_sites	DW_FORM_flag_present
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_prototyped	DW_FORM_flag_present
+	DW_AT_external	DW_FORM_flag_present
+	DW_AT_noreturn	DW_FORM_flag_present
+
+[10] DW_TAG_formal_parameter	DW_CHILDREN_no
+	DW_AT_location	DW_FORM_sec_offset
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+
+[11] DW_TAG_subprogram	DW_CHILDREN_no
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_GNU_all_call_sites	DW_FORM_flag_present
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+
+Abbrev table for offset: 0x0000019d
+[1] DW_TAG_compile_unit	DW_CHILDREN_yes
+	DW_AT_producer	DW_FORM_strp
+	DW_AT_language	DW_FORM_data2
+	DW_AT_name	DW_FORM_strp
+	DW_AT_stmt_list	DW_FORM_sec_offset
+	DW_AT_comp_dir	DW_FORM_strp
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+
+[2] DW_TAG_variable	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_type	DW_FORM_ref4
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_location	DW_FORM_exprloc
+
+[3] DW_TAG_base_type	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_encoding	DW_FORM_data1
+	DW_AT_byte_size	DW_FORM_data1
+
+[4] DW_TAG_subprogram	DW_CHILDREN_no
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_GNU_all_call_sites	DW_FORM_flag_present
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_prototyped	DW_FORM_flag_present
+	DW_AT_type	DW_FORM_ref4
+	DW_AT_external	DW_FORM_flag_present
+
+[5] DW_TAG_pointer_type	DW_CHILDREN_no
+	DW_AT_type	DW_FORM_ref4
+
+
+.debug_info contents:
+0x00000000: Compile Unit: length = 0x00000085, format = DWARF32, version = 0x0004, abbr_offset = 0x0000, addr_size = 0x04 (next unit at 0x00000089)
+
+0x0000000b: DW_TAG_compile_unit
+              DW_AT_producer	("clang version 14.0.0 (https://github.com/llvm/llvm-project 8e284be04f2cd43a821289133a759afa2844f935)")
+              DW_AT_language	(DW_LANG_C99)
+              DW_AT_name	("test.c")
+              DW_AT_stmt_list	(0x00000000)
+              DW_AT_comp_dir	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/examples")
+              DW_AT_low_pc	(0x00000000)
+              DW_AT_ranges	(0x00000000
+                 [0x00000007, 0x00000059)
+                 [0x0000005a, 0x000000b7))
+
+0x00000026:   DW_TAG_pointer_type
+                DW_AT_type	(0x0000002b "char")
+
+0x0000002b:   DW_TAG_base_type
+                DW_AT_name	("char")
+                DW_AT_encoding	(DW_ATE_signed_char)
+                DW_AT_byte_size	(0x01)
+
+0x00000032:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x00000007)
+                DW_AT_high_pc	(0x00000059)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x0 0x3, DW_OP_stack_value)
+                DW_AT_name	("use_func")
+                DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/examples/./test.c")
+                DW_AT_decl_line	(4)
+                DW_AT_prototyped	(true)
+                DW_AT_external	(true)
+
+0x00000046:     DW_TAG_formal_parameter
+                  DW_AT_location	(DW_OP_fbreg +12)
+                  DW_AT_name	("a")
+                  DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/examples/./test.c")
+                  DW_AT_decl_line	(4)
+                  DW_AT_type	(0x00000083 "int*")
+
+0x00000054:     NULL
+
+0x00000055:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x0000005a)
+                DW_AT_high_pc	(0x000000b7)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x0 0x2, DW_OP_stack_value)
+                DW_AT_name	("main")
+                DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/examples/./test.c")
+                DW_AT_decl_line	(8)
+                DW_AT_type	(0x0000007c "int")
+                DW_AT_external	(true)
+
+0x0000006d:     DW_TAG_variable
+                  DW_AT_location	(DW_OP_fbreg +8)
+                  DW_AT_name	("a")
+                  DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/examples/./test.c")
+                  DW_AT_decl_line	(9)
+                  DW_AT_type	(0x0000007c "int")
+
+0x0000007b:     NULL
+
+0x0000007c:   DW_TAG_base_type
+                DW_AT_name	("int")
+                DW_AT_encoding	(DW_ATE_signed)
+                DW_AT_byte_size	(0x04)
+
+0x00000083:   DW_TAG_pointer_type
+                DW_AT_type	(0x0000007c "int")
+
+0x00000088:   NULL
+0x00000089: Compile Unit: length = 0x00000051, format = DWARF32, version = 0x0004, abbr_offset = 0x006e, addr_size = 0x04 (next unit at 0x000000de)
+
+0x00000094: DW_TAG_compile_unit
+              DW_AT_producer	("clang version 14.0.0 (https://github.com/llvm/llvm-project 8e284be04f2cd43a821289133a759afa2844f935)")
+              DW_AT_language	(DW_LANG_C99)
+              DW_AT_name	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c")
+              DW_AT_stmt_list	(0x00000098)
+              DW_AT_comp_dir	("/mnt/c/Users/warren/Desktop/wasm/test")
+              DW_AT_low_pc	(0x000000c4)
+              DW_AT_high_pc	(0x000000d5)
+
+0x000000af:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x000000c4)
+                DW_AT_high_pc	(0x000000d5)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x3 0x0, DW_OP_stack_value)
+                DW_AT_GNU_all_call_sites	(true)
+                DW_AT_name	("_start")
+                DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c")
+                DW_AT_decl_line	(19)
+                DW_AT_prototyped	(true)
+                DW_AT_external	(true)
+
+0x000000c6:     DW_TAG_variable
+                  DW_AT_location	(0x00000000: 
+                     [0x000000d1, 0x000000d3): DW_OP_WASM_location 0x2 0x0, DW_OP_stack_value)
+                  DW_AT_name	("r")
+                  DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c")
+                  DW_AT_decl_line	(29)
+                  DW_AT_type	(0x000000d6 "int")
+
+0x000000d5:     NULL
+
+0x000000d6:   DW_TAG_base_type
+                DW_AT_name	("int")
+                DW_AT_encoding	(DW_ATE_signed)
+                DW_AT_byte_size	(0x04)
+
+0x000000dd:   NULL
+0x000000de: Compile Unit: length = 0x00000052, format = DWARF32, version = 0x0004, abbr_offset = 0x00b4, addr_size = 0x04 (next unit at 0x00000134)
+
+0x000000e9: DW_TAG_compile_unit
+              DW_AT_producer	("clang version 14.0.0 (https://github.com/llvm/llvm-project 8e284be04f2cd43a821289133a759afa2844f935)")
+              DW_AT_language	(DW_LANG_C99)
+              DW_AT_name	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/_Exit.c")
+              DW_AT_stmt_list	(0x0000013c)
+              DW_AT_comp_dir	("/mnt/c/Users/warren/Desktop/wasm/test")
+              DW_AT_low_pc	(0x000000d6)
+              DW_AT_high_pc	(0x000000dd)
+
+0x00000104:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x000000d6)
+                DW_AT_high_pc	(0x000000dd)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x3 0x0, DW_OP_stack_value)
+                DW_AT_GNU_all_call_sites	(true)
+                DW_AT_name	("_Exit")
+                DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/_Exit.c")
+                DW_AT_decl_line	(4)
+                DW_AT_prototyped	(true)
+                DW_AT_external	(true)
+                DW_AT_noreturn	(true)
+
+0x0000011b:     DW_TAG_formal_parameter
+                  DW_AT_location	(DW_OP_WASM_location 0x0 0x0, DW_OP_stack_value)
+                  DW_AT_name	("ec")
+                  DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/_Exit.c")
+                  DW_AT_decl_line	(4)
+                  DW_AT_type	(0x0000012c "int")
+
+0x0000012b:     NULL
+
+0x0000012c:   DW_TAG_base_type
+                DW_AT_name	("int")
+                DW_AT_encoding	(DW_ATE_signed)
+                DW_AT_byte_size	(0x04)
+
+0x00000133:   NULL
+0x00000134: Compile Unit: length = 0x000000ae, format = DWARF32, version = 0x0004, abbr_offset = 0x00fd, addr_size = 0x04 (next unit at 0x000001e6)
+
+0x0000013f: DW_TAG_compile_unit
+              DW_AT_producer	("clang version 14.0.0 (https://github.com/llvm/llvm-project 8e284be04f2cd43a821289133a759afa2844f935)")
+              DW_AT_language	(DW_LANG_C99)
+              DW_AT_name	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c")
+              DW_AT_stmt_list	(0x000001cb)
+              DW_AT_comp_dir	("/mnt/c/Users/warren/Desktop/wasm/test")
+              DW_AT_low_pc	(0x00000000)
+              DW_AT_ranges	(0x00000018
+                 [0x000000de, 0x00000109)
+                 [0x0000010a, 0x00000117)
+                 [0x00000000, 0x00000001))
+
+0x0000015a:   DW_TAG_typedef
+                DW_AT_type	(0x00000165 "long unsigned int")
+                DW_AT_name	("uintptr_t")
+                DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/cache/sysroot/include/bits/alltypes.h")
+                DW_AT_decl_line	(133)
+
+0x00000165:   DW_TAG_base_type
+                DW_AT_name	("long unsigned int")
+                DW_AT_encoding	(DW_ATE_unsigned)
+                DW_AT_byte_size	(0x04)
+
+0x0000016c:   DW_TAG_pointer_type
+                DW_AT_type	(0x00000171 "void()*")
+
+0x00000171:   DW_TAG_pointer_type
+                DW_AT_type	(0x00000176 "void()")
+
+0x00000176:   DW_TAG_subroutine_type
+
+0x00000177:     DW_TAG_unspecified_parameters
+
+0x00000178:     NULL
+
+0x00000179:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x000000de)
+                DW_AT_high_pc	(0x00000109)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x3 0x0, DW_OP_stack_value)
+                DW_AT_GNU_all_call_sites	(true)
+                DW_AT_name	("libc_exit_fini")
+                DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c")
+                DW_AT_decl_line	(18)
+                DW_AT_prototyped	(true)
+
+0x00000190:     DW_TAG_variable
+                  DW_AT_location	(0x00000016: 
+                     [0x000000e5, 0x000000e9): DW_OP_WASM_location 0x0 0x0, DW_OP_stack_value
+                     [0x000000e9, 0x000000ec): DW_OP_WASM_location 0x2 0x0, DW_OP_stack_value
+                     [0x000000f5, 0x000000f7): DW_OP_WASM_location 0x2 0x0, DW_OP_stack_value
+                     [0x000000f7, 0x00000104): DW_OP_WASM_location 0x0 0x0, DW_OP_stack_value)
+                  DW_AT_name	("a")
+                  DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c")
+                  DW_AT_decl_line	(20)
+                  DW_AT_type	(0x0000015a "uintptr_t")
+
+0x0000019f:     NULL
+
+0x000001a0:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x0000010a)
+                DW_AT_high_pc	(0x00000117)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x3 0x0, DW_OP_stack_value)
+                DW_AT_GNU_all_call_sites	(true)
+                DW_AT_name	("exit")
+                DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c")
+                DW_AT_decl_line	(28)
+                DW_AT_prototyped	(true)
+                DW_AT_external	(true)
+                DW_AT_noreturn	(true)
+
+0x000001b7:     DW_TAG_formal_parameter
+                  DW_AT_location	(0x0000005e: 
+                     [0x0000010a, 0x00000117): DW_OP_WASM_location 0x0 0x0, DW_OP_stack_value)
+                  DW_AT_name	("code")
+                  DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c")
+                  DW_AT_decl_line	(28)
+                  DW_AT_type	(0x000001de "int")
+
+0x000001c6:     NULL
+
+0x000001c7:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x00000000)
+                DW_AT_high_pc	(0x00000000)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x3 0x0, DW_OP_stack_value)
+                DW_AT_GNU_all_call_sites	(true)
+                DW_AT_name	("dummy")
+                DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c")
+                DW_AT_decl_line	(5)
+
+0x000001de:   DW_TAG_base_type
+                DW_AT_name	("int")
+                DW_AT_encoding	(DW_ATE_signed)
+                DW_AT_byte_size	(0x04)
+
+0x000001e5:   NULL
+0x000001e6: Compile Unit: length = 0x0000005b, format = DWARF32, version = 0x0004, abbr_offset = 0x019d, addr_size = 0x04 (next unit at 0x00000245)
+
+0x000001f1: DW_TAG_compile_unit
+              DW_AT_producer	("clang version 14.0.0 (https://github.com/llvm/llvm-project 8e284be04f2cd43a821289133a759afa2844f935)")
+              DW_AT_language	(DW_LANG_C99)
+              DW_AT_name	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno/__errno_location.c")
+              DW_AT_stmt_list	(0x00000350)
+              DW_AT_comp_dir	("/mnt/c/Users/warren/Desktop/wasm/test")
+              DW_AT_low_pc	(0x0000015e)
+              DW_AT_high_pc	(0x00000163)
+
+0x0000020c:   DW_TAG_variable
+                DW_AT_name	("__errno_storage")
+                DW_AT_type	(0x0000021d "int")
+                DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno/__errno_location.c")
+                DW_AT_decl_line	(13)
+                DW_AT_location	(DW_OP_addr 0x400)
+
+0x0000021d:   DW_TAG_base_type
+                DW_AT_name	("int")
+                DW_AT_encoding	(DW_ATE_signed)
+                DW_AT_byte_size	(0x04)
+
+0x00000224:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x0000015e)
+                DW_AT_high_pc	(0x00000163)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x3 0x0, DW_OP_stack_value)
+                DW_AT_GNU_all_call_sites	(true)
+                DW_AT_name	("__errno_location")
+                DW_AT_decl_file	("/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno/__errno_location.c")
+                DW_AT_decl_line	(15)
+                DW_AT_prototyped	(true)
+                DW_AT_type	(0x0000023f "int*")
+                DW_AT_external	(true)
+
+0x0000023f:   DW_TAG_pointer_type
+                DW_AT_type	(0x0000021d "int")
+
+0x00000244:   NULL
+
+.debug_loc contents:
+0x00000000: 
+            (0x0000000d, 0x0000000f): DW_OP_WASM_location 0x2 0x0, DW_OP_stack_value
+
+0x00000016: 
+            [0x000000e5, 0x000000e9): DW_OP_WASM_location 0x0 0x0, DW_OP_stack_value
+            [0x000000e9, 0x000000ec): DW_OP_WASM_location 0x2 0x0, DW_OP_stack_value
+            [0x000000f5, 0x000000f7): DW_OP_WASM_location 0x2 0x0, DW_OP_stack_value
+            [0x000000f7, 0x00000104): DW_OP_WASM_location 0x0 0x0, DW_OP_stack_value
+
+0x0000005e: 
+            [0x0000010a, 0x00000117): DW_OP_WASM_location 0x0 0x0, DW_OP_stack_value
+
+.debug_line contents:
+debug_line[0x00000000]
+Line table prologue:
+    total_length: 0x00000094
+          format: DWARF32
+         version: 4
+ prologue_length: 0x00000020
+ min_inst_length: 1
+max_ops_per_inst: 1
+ default_is_stmt: 1
+       line_base: -5
+      line_range: 14
+     opcode_base: 13
+standard_opcode_lengths[DW_LNS_copy] = 0
+standard_opcode_lengths[DW_LNS_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_advance_line] = 1
+standard_opcode_lengths[DW_LNS_set_file] = 1
+standard_opcode_lengths[DW_LNS_set_column] = 1
+standard_opcode_lengths[DW_LNS_negate_stmt] = 0
+standard_opcode_lengths[DW_LNS_set_basic_block] = 0
+standard_opcode_lengths[DW_LNS_const_add_pc] = 0
+standard_opcode_lengths[DW_LNS_fixed_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_set_prologue_end] = 0
+standard_opcode_lengths[DW_LNS_set_epilogue_begin] = 0
+standard_opcode_lengths[DW_LNS_set_isa] = 1
+include_directories[  1] = "."
+file_names[  1]:
+           name: "test.c"
+      dir_index: 1
+       mod_time: 0x00000000
+         length: 0x00000000
+
+Address            Line   Column File   ISA Discriminator Flags
+------------------ ------ ------ ------ --- ------------- -------------
+0x0000000000000007      4      0      1   0             0  is_stmt
+0x0000000000000032      5     20      1   0             0  is_stmt prologue_end
+0x0000000000000039      5     23      1   0             0 
+0x0000000000000044      5      5      1   0             0 
+0x0000000000000048      6      1      1   0             0  is_stmt
+0x0000000000000059      6      1      1   0             0  is_stmt end_sequence
+0x000000000000005a      8      0      1   0             0  is_stmt
+0x000000000000008d     10      5      1   0             0  is_stmt prologue_end
+0x00000000000000a0     11      5      1   0             0  is_stmt
+0x00000000000000b7     11      5      1   0             0  is_stmt end_sequence
+
+debug_line[0x00000098]
+Line table prologue:
+    total_length: 0x000000a0
+          format: DWARF32
+         version: 4
+ prologue_length: 0x00000055
+ min_inst_length: 1
+max_ops_per_inst: 1
+ default_is_stmt: 1
+       line_base: -5
+      line_range: 14
+     opcode_base: 13
+standard_opcode_lengths[DW_LNS_copy] = 0
+standard_opcode_lengths[DW_LNS_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_advance_line] = 1
+standard_opcode_lengths[DW_LNS_set_file] = 1
+standard_opcode_lengths[DW_LNS_set_column] = 1
+standard_opcode_lengths[DW_LNS_negate_stmt] = 0
+standard_opcode_lengths[DW_LNS_set_basic_block] = 0
+standard_opcode_lengths[DW_LNS_const_add_pc] = 0
+standard_opcode_lengths[DW_LNS_fixed_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_set_prologue_end] = 0
+standard_opcode_lengths[DW_LNS_set_epilogue_begin] = 0
+standard_opcode_lengths[DW_LNS_set_isa] = 1
+include_directories[  1] = "/home/warren/emsdk/upstream/emscripten/system/lib/libc"
+file_names[  1]:
+           name: "crt1.c"
+      dir_index: 1
+       mod_time: 0x00000000
+         length: 0x00000000
+
+Address            Line   Column File   ISA Discriminator Flags
+------------------ ------ ------ ------ --- ------------- -------------
+0x00000000000000c4     19      0      1   0             0  is_stmt
+0x00000000000000c5     20      7      1   0             0  is_stmt prologue_end
+0x00000000000000cc     21      5      1   0             0  is_stmt
+0x00000000000000cf     29     11      1   0             0  is_stmt
+0x00000000000000d1     31      3      1   0             0  is_stmt
+0x00000000000000d5     31      3      1   0             0  is_stmt end_sequence
+
+debug_line[0x0000013c]
+Line table prologue:
+    total_length: 0x0000008b
+          format: DWARF32
+         version: 4
+ prologue_length: 0x00000064
+ min_inst_length: 1
+max_ops_per_inst: 1
+ default_is_stmt: 1
+       line_base: -5
+      line_range: 14
+     opcode_base: 13
+standard_opcode_lengths[DW_LNS_copy] = 0
+standard_opcode_lengths[DW_LNS_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_advance_line] = 1
+standard_opcode_lengths[DW_LNS_set_file] = 1
+standard_opcode_lengths[DW_LNS_set_column] = 1
+standard_opcode_lengths[DW_LNS_negate_stmt] = 0
+standard_opcode_lengths[DW_LNS_set_basic_block] = 0
+standard_opcode_lengths[DW_LNS_const_add_pc] = 0
+standard_opcode_lengths[DW_LNS_fixed_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_set_prologue_end] = 0
+standard_opcode_lengths[DW_LNS_set_epilogue_begin] = 0
+standard_opcode_lengths[DW_LNS_set_isa] = 1
+include_directories[  1] = "/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit"
+file_names[  1]:
+           name: "_Exit.c"
+      dir_index: 1
+       mod_time: 0x00000000
+         length: 0x00000000
+
+Address            Line   Column File   ISA Discriminator Flags
+------------------ ------ ------ ------ --- ------------- -------------
+0x00000000000000d6      5      0      1   0             0  is_stmt
+0x00000000000000d7      7      2      1   0             0  is_stmt prologue_end
+0x00000000000000dd      7      2      1   0             0  is_stmt end_sequence
+
+debug_line[0x000001cb]
+Line table prologue:
+    total_length: 0x00000181
+          format: DWARF32
+         version: 4
+ prologue_length: 0x000000b3
+ min_inst_length: 1
+max_ops_per_inst: 1
+ default_is_stmt: 1
+       line_base: -5
+      line_range: 14
+     opcode_base: 13
+standard_opcode_lengths[DW_LNS_copy] = 0
+standard_opcode_lengths[DW_LNS_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_advance_line] = 1
+standard_opcode_lengths[DW_LNS_set_file] = 1
+standard_opcode_lengths[DW_LNS_set_column] = 1
+standard_opcode_lengths[DW_LNS_negate_stmt] = 0
+standard_opcode_lengths[DW_LNS_set_basic_block] = 0
+standard_opcode_lengths[DW_LNS_const_add_pc] = 0
+standard_opcode_lengths[DW_LNS_fixed_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_set_prologue_end] = 0
+standard_opcode_lengths[DW_LNS_set_epilogue_begin] = 0
+standard_opcode_lengths[DW_LNS_set_isa] = 1
+include_directories[  1] = "/home/warren/emsdk/upstream/emscripten/cache/sysroot/include/bits"
+include_directories[  2] = "/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit"
+file_names[  1]:
+           name: "alltypes.h"
+      dir_index: 1
+       mod_time: 0x00000000
+         length: 0x00000000
+file_names[  2]:
+           name: "exit.c"
+      dir_index: 2
+       mod_time: 0x00000000
+         length: 0x00000000
+
+Address            Line   Column File   ISA Discriminator Flags
+------------------ ------ ------ ------ --- ------------- -------------
+0x00000000000000de     19      0      2   0             0  is_stmt
+0x00000000000000e9     21      2      2   0             0  is_stmt prologue_end
+0x00000000000000f0     22     20      2   0             0  is_stmt
+0x00000000000000f5     22      4      2   0             0 
+0x00000000000000fa     22      3      2   0             0 
+0x00000000000000fd     21     10      2   0             0  is_stmt
+0x00000000000000ff     21      2      2   0             0 
+0x0000000000000101     21     10      2   0             0 
+0x0000000000000102     21      2      2   0             0 
+0x0000000000000106     23      2      2   0             0  is_stmt
+0x0000000000000108     24      1      2   0             0  is_stmt
+0x0000000000000109     24      1      2   0             0  is_stmt end_sequence
+0x000000000000010a     29      0      2   0             0  is_stmt
+0x000000000000010b     30      2      2   0             0  is_stmt prologue_end
+0x000000000000010d     31      2      2   0             0  is_stmt
+0x000000000000010f     32      2      2   0             0  is_stmt
+0x0000000000000111     33      2      2   0             0  is_stmt
+0x0000000000000117     33      2      2   0             0  is_stmt end_sequence
+
+debug_line[0x00000350]
+Line table prologue:
+    total_length: 0x00000097
+          format: DWARF32
+         version: 4
+ prologue_length: 0x00000070
+ min_inst_length: 1
+max_ops_per_inst: 1
+ default_is_stmt: 1
+       line_base: -5
+      line_range: 14
+     opcode_base: 13
+standard_opcode_lengths[DW_LNS_copy] = 0
+standard_opcode_lengths[DW_LNS_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_advance_line] = 1
+standard_opcode_lengths[DW_LNS_set_file] = 1
+standard_opcode_lengths[DW_LNS_set_column] = 1
+standard_opcode_lengths[DW_LNS_negate_stmt] = 0
+standard_opcode_lengths[DW_LNS_set_basic_block] = 0
+standard_opcode_lengths[DW_LNS_const_add_pc] = 0
+standard_opcode_lengths[DW_LNS_fixed_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_set_prologue_end] = 0
+standard_opcode_lengths[DW_LNS_set_epilogue_begin] = 0
+standard_opcode_lengths[DW_LNS_set_isa] = 1
+include_directories[  1] = "/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno"
+file_names[  1]:
+           name: "__errno_location.c"
+      dir_index: 1
+       mod_time: 0x00000000
+         length: 0x00000000
+
+Address            Line   Column File   ISA Discriminator Flags
+------------------ ------ ------ ------ --- ------------- -------------
+0x000000000000015e     16      0      1   0             0  is_stmt
+0x000000000000015f     17      2      1   0             0  is_stmt prologue_end
+0x0000000000000163     17      2      1   0             0  is_stmt end_sequence
+
+
+.debug_str contents:
+0x00000000: "dummy"
+0x00000006: "/mnt/c/Users/warren/Desktop/wasm/test"
+0x0000002c: "_start"
+0x00000033: "long unsigned int"
+0x00000045: "exit"
+0x0000004a: "_Exit"
+0x00000050: "uintptr_t"
+0x0000005a: "/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/examples"
+0x00000095: "char"
+0x0000009a: "__errno_location"
+0x000000ab: "main"
+0x000000b0: "libc_exit_fini"
+0x000000bf: "__errno_storage"
+0x000000cf: "code"
+0x000000d4: "use_func"
+0x000000dd: "ec"
+0x000000e0: "test.c"
+0x000000e7: "/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/exit.c"
+0x00000133: "/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/exit/_Exit.c"
+0x00000180: "/home/warren/emsdk/upstream/emscripten/system/lib/libc/musl/src/errno/__errno_location.c"
+0x000001d9: "/home/warren/emsdk/upstream/emscripten/system/lib/libc/crt1.c"
+0x00000217: "a"
+0x00000219: "clang version 14.0.0 (https://github.com/llvm/llvm-project 8e284be04f2cd43a821289133a759afa2844f935)"
+
+.debug_ranges contents:
+00000000 00000007 00000059
+00000000 0000005a 000000b7
+00000000 <End of list>
+00000018 000000de 00000109
+00000018 0000010a 00000117
+00000018 00000000 00000001
+00000018 <End of list>
