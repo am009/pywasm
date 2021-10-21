@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "global.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\safe-rt\\examples\\global.py",
+            "cwd": "${workspaceFolder}\\safe-rt\\examples",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "test.py",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\safe-rt\\examples\\test\\test.py",
+            "cwd": "${workspaceFolder}\\safe-rt\\examples\\test",
+            "console": "integratedTerminal"
+        }
+    ]
+}
