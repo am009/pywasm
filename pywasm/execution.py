@@ -819,6 +819,7 @@ class ArithmeticLogicUnit:
         if addr < 0 or addr + size > len(memory.data):
             raise Exception('pywasm: out of bounds memory access')
         memory.data[addr:addr + size] = r.data[0:size]
+        # TODO multi module or multi memory
         safety.post_memory_store(config.opts._safe_rule, memory, addr, addr+size)
 
     @staticmethod
