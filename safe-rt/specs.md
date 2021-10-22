@@ -54,11 +54,23 @@ TODO 是否有global域的全局变量？
 同时指定名字和函数
 
 
+```json
+{
+    "local": [{
+        "location": { "function": "main", "name": "hello" },
+        "check_func": "lambda x:x>0 and x < 256"
+    }]
+}
+```
 转换后：
 ```json
 {
-    "location": {"func_name1": {
-        "location": {"fbreg": 8, "prologue": 5}, // ["local", 8]
+    "prologue": {
+        "func_name1": ["wasm-local", 2],
+        "funcname2": ["wasm-local", 3]
+    },
+    "local": {"func_name1": [{
+        "location": ["fbreg", 8], // ["local", 8]
         "type": "<DIE>",
         "check_func": "lambda x:x<0 and x<256",
         "info": {
@@ -67,10 +79,11 @@ TODO 是否有global域的全局变量？
             "decl_file": "xxx.c",
             "decl_line": 4
         }
-    },
-    "funcname2":{
+    }],
+    "funcname2":[{
         // ...
-    }}
+    }]}
 }
 ```
 设计考量：因为直接在指令执行时判断当前函数，方便直接通过`in`判断当前函数是不是在dict内，以及方便取出规则。
+prologue每个函数只有一个，而local监控每个函数可能有多个，所以单独拿出来。

@@ -19,6 +19,14 @@
             "program": "${workspaceFolder}\\safe-rt\\examples\\test\\test.py",
             "cwd": "${workspaceFolder}\\safe-rt\\examples\\test",
             "console": "integratedTerminal"
-        }
+        },
+        {
+            "name": "localtest",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\safe-rt\\test\\test_local.py",
+            "cwd": "${workspaceFolder}\\safe-rt\\test",
+            "console": "integratedTerminal"
+        }        
     ]
 }

@@ -2,8 +2,8 @@ import unittest
 import os
 import json
 
-from utils import load_rule
 import pywasm
+
 
 class TestGlobal(unittest.TestCase):
 

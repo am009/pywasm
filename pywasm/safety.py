@@ -25,59 +25,143 @@ def convert_user_rule(module: binary.Module, user_rule):
     # global
     global_rules = []
     memory_rules = []
-    for elem in user_rule['global']:
-        if 'location' not in elem:
-            log.fatalln(f"Error: No location in rule: {elem}")
-        val_die, type_die, CU = get_global_variable_by_name(
-            dwarf_info, elem['location'])
-        if val_die is None:
-            log.fatalln(
-                f"Error: Unable to find a variable matching location: {elem['location']}")
-        rule = {}  # location type check_func info(name, decl_file, decl_line)
-        # info
-        line_prog = dwarf_info.line_program_for_CU(CU)
-        decl_file_ind = val_die.attributes['DW_AT_decl_file'].value
-        decl_file = line_prog['file_entry'][decl_file_ind-1].name
-        rule['info'] = {"name": val_die.attributes['DW_AT_name'].value.decode(),
-                        "decl_file": decl_file.decode(),
-                        "decl_line": val_die.attributes['DW_AT_decl_line'].value, }
-        # location
-        loc_expr = val_die.attributes['DW_AT_location'].value
-        variable_loc = dwarf_expr_parser.parse_expr(loc_expr)
-        where, rule['location'] = decode_location_g(variable_loc, type_die)
-        # type
-        rule['type'] = type_die
-        # check_func
-        rule['check_func'] = elem['check_func']
-        if where == 'memory':
-            memory_rules.append(rule)
-        elif where == 'global':
-            global_rules.append(rule)
-    if len(global_rules) > 0:
-        safe_rule['global'] = global_rules
-    if len(memory_rules) > 0:
-        safe_rule['memory'] = memory_rules
+    if 'global' in user_rule:
+        for elem in user_rule['global']:
+            if 'location' not in elem:
+                log.fatalln(f"Error: No location in rule: {elem}")
+            val_die, type_die, CU = get_global_variable_by_name(
+                dwarf_info, elem['location'])
+            if val_die is None:
+                log.fatalln(
+                    f"Error: Unable to find a variable matching location: {elem['location']}")
+            # location type check_func info(name, decl_file, decl_line)
+            rule = {}
+            # info
+            line_prog = dwarf_info.line_program_for_CU(CU)
+            decl_file_ind = val_die.attributes['DW_AT_decl_file'].value
+            decl_file = line_prog['file_entry'][decl_file_ind-1].name
+            rule['info'] = {"name": val_die.attributes['DW_AT_name'].value.decode(),
+                            "decl_file": decl_file.decode(),
+                            "decl_line": val_die.attributes['DW_AT_decl_line'].value, }
+            # location
+            loc_expr = val_die.attributes['DW_AT_location'].value
+            variable_loc = dwarf_expr_parser.parse_expr(loc_expr)
+            where, rule['location'] = decode_location(variable_loc, type_die)
+            # type
+            rule['type'] = type_die
+            # check_func
+            rule['check_func'] = elem['check_func']
+            if where == 'memory':
+                memory_rules.append(rule)
+            elif where == 'global':
+                global_rules.append(rule)
+        if len(global_rules) > 0:
+            safe_rule['global'] = global_rules
+        if len(memory_rules) > 0:
+            safe_rule['memory'] = memory_rules
 
+    if 'local' in user_rule:
+        local_rules = {}
+        prologue_funcs = []  # waited to decode fbreg info
+        for elem in user_rule['local']:
+            func_name = elem['location']['function']
+            func_die, val_die, type_die, CU = get_local_variable_by_name(
+                dwarf_info, elem['location'])
+            if val_die is None:
+                log.fatalln(
+                    f"Error: Unable to find a variable matching location: {elem['location']}")
+            prologue_funcs.append(func_die)
+
+            rule = {}
+            line_prog = dwarf_info.line_program_for_CU(CU)
+            decl_file_ind = val_die.attributes['DW_AT_decl_file'].value
+            decl_file = line_prog['file_entry'][decl_file_ind-1].name
+            rule['info'] = {"function": func_name,
+                            "name": val_die.attributes['DW_AT_name'].value.decode(),
+                            "decl_file": decl_file.decode(),
+                            "decl_line": val_die.attributes['DW_AT_decl_line'].value, }
+            rule['type'] = type_die
+            rule['check_func'] = elem['check_func']
+            # location
+            loc_expr = val_die.attributes['DW_AT_location'].value
+            variable_loc = dwarf_expr_parser.parse_expr(loc_expr)
+            where, rule['location'] = decode_location(variable_loc, type_die)
+            # decode info in val_die
+            if func_name not in local_rules:
+                local_rules[func_name] = []
+            local_rules[func_name].append(rule)
+        # decode prologues for prologue_funcs
+        prologue_dict = {}
+        for func_die in prologue_funcs:
+            func_name = func_die.attributes['DW_AT_name'].value.decode()
+            loc_expr = func_die.attributes['DW_AT_frame_base'].value
+            variable_loc = parse_dwarf_expr(dwarf_expr_parser, loc_expr)
+            assert variable_loc[1].op_name == 'DW_OP_stack_value'
+            assert variable_loc[0].op_name == 'DW_OP_WASM_location'
+            prologue_dict[func_name] = variable_loc[0].args
+        safe_rule['prologue'] = prologue_dict
+        safe_rule['local'] = local_rules
     return safe_rule
 
 
-def decode_location_g(loc_exprs: List[DWARFExprOp], type_die: DIE):
+def get_size_by_type(die: DIE):
+    """
+    Get size of a DW_AT_type Debug Info Entry.
+    Used by decode_var_type to decide if the address points into an variable.
+    """
+    if die.tag == 'DW_TAG_base_type':
+        return die.attributes['DW_AT_byte_size'].value
+    elif die.tag in ('DW_TAG_pointer_type', 'DW_TAG_subroutine_type'):
+        return 4
+    elif die.tag == 'DW_TAG_array_type':
+        ele_size = get_size_by_type(die.get_DIE_from_attribute('DW_AT_type'))
+        for child in die.iter_children():
+            if child.tag == 'DW_TAG_subrange_type':
+                ele_count = child.attributes['DW_AT_count'].value
+        return ele_size * ele_count
+    elif die.tag == 'DW_TAG_typedef':
+        return get_size_by_type(die.get_DIE_from_attribute('DW_AT_type'))
+    else:
+        raise Exception("Unknown type tag: ", die.tag)
+        return 4
+
+
+# used by parse_dwarf_expr
+op2name = {0x0: "wasm-local", 0x1: "wasm-global",
+           0x2: "wasm-operand-stack", 0x3: "wasm-global"}
+
+
+def parse_dwarf_expr(dwarf_expr_parser, expr):
+    """
+    decode variable location expression
+    additional support for DW_OP_WASM_location(0xED)
+    .. seealso:: https://yurydelendik.github.io/webassembly-dwarf/#DWARF-expressions-and-location-descriptions
+    """
+    exps = []
+    if expr[0] == 0xED:
+        exps.append(DWARFExprOp(expr[1], 'DW_OP_WASM_location', [
+                    op2name[expr[1]], expr[2]]))
+        expr = expr[3:]
+    exps += dwarf_expr_parser.parse_expr(expr)
+    return exps
+
+
+def decode_location(loc_exprs: List[DWARFExprOp], type_die: DIE):
     """
     decode global variable location.
     """
-    if type_die.tag == 'DW_TAG_base_type':
-        var_size = type_die.attributes['DW_AT_byte_size'].value
-    else:
-        raise Exception("Unimplemented")
+    var_size = get_size_by_type(type_die)
     for loc in loc_exprs:
         if loc.op_name == 'DW_OP_addr':
             return 'memory', [loc.args[0], loc.args[0] + var_size]
+        elif loc.op_name == 'DW_OP_fbreg':
+            return 'stack_memory', ['fbreg', loc.args[0]]
 
 
 def get_global_variable_by_name(dwarf_info: DWARFInfo, loc_info: Dict):
     '''
-
-    return (location, type, info)
+    find global variable in DWARF info.
+    return (variable_die, type_die, CU)
     '''
     if 'name' in loc_info:
         name = loc_info['name']
@@ -91,8 +175,34 @@ def get_global_variable_by_name(dwarf_info: DWARFInfo, loc_info: Dict):
                             'DW_AT_type')
                         return (die, variable_type, CU)
     else:
-        log.fatalln(f"Error: location entry not recognized: {loc_info}")
+        log.fatalln(f"Error: unable to decode location entry: {loc_info}")
     return None, None, None
+
+
+def get_local_variable_by_name(dwarf_info: DWARFInfo, loc_info: Dict):
+    '''
+    find local variable in DWARF info.
+    return (func_die, val_die, type_die, CU)
+    '''
+    if 'name' in loc_info:
+        var_name = loc_info['name']
+        func_name = loc_info['function']
+        for CU in dwarf_info.iter_CUs():  # Compilation Unit
+            cu_die = CU.get_top_DIE()
+            for func in cu_die.iter_children():
+                if func.tag != 'DW_TAG_subprogram':
+                    continue
+                for die in func.iter_children():
+                    variable_name = die.attributes['DW_AT_name'].value
+                    function_name = func.attributes['DW_AT_name'].value
+                    if function_name == func_name.encode() and \
+                            variable_name == var_name.encode():
+                        variable_type = die.get_DIE_from_attribute(
+                            'DW_AT_type')
+                        return (func, die, variable_type, CU)
+    else:
+        log.fatalln(f"Error: unable to decode location entry: {loc_info}")
+    return None, None, None, None
 
 
 # ===========Hooks==========
@@ -118,10 +228,11 @@ def post_memory_store(user_rule: Dict, memory, addr_begin, addr_end, is_init=Fal
         if is_overlap:
             new_val = decode_by_type(rule['type'], memory.data[loc[0]: loc[1]])
             user_func = eval(rule['check_func'])
-            if not user_func(new_val): # check fail
+            if not user_func(new_val):  # check fail
                 if is_init:
                     log.println("After Memory initilization: ")
-                raise Exception(f'Safe-rt: Runtime rule violation: Variable {rule["info"]["name"]} = {new_val} (defined at {rule["info"]["decl_file"]}:{rule["info"]["decl_line"]}) does not match rule "{rule["check_func"]}"')
+                raise Exception(
+                    f'Safe-rt: Runtime rule violation: Variable {rule["info"]["name"]} = {new_val} (defined at {rule["info"]["decl_file"]}:{rule["info"]["decl_line"]}) does not match rule "{rule["check_func"]}"')
 
 
 signed_decode = {1: num.LittleEndian.i8, 2: num.LittleEndian.i16,
