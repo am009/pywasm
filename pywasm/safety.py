@@ -215,7 +215,7 @@ def post_memory_store(user_rule: Dict, memory, addr_begin, addr_end, is_init=Fal
     if user_rule is None:
         return
     # if range overlap
-    for rule in user_rule['memory']:
+    for rule in user_rule.get('memory', []):
         # {'info': {}, 'location': [1024, 1028], 'type': DIE, 'check_func': 'lambda'}
         is_overlap = False or is_init
         loc = rule['location']

@@ -389,6 +389,59 @@ class LabelIndex(int):
         return LabelIndex(leb128.u.decode_reader(r)[0])
 
 
+class NameAssoc:
+    # namemap ::= vec(nameassoc)
+    # nameassoc ::= idx name
+    def __init__(self):
+        self.ind: int = 0x00
+        self.name: str = ''
+
+    def __repr__(self):
+        return f'name_assoc()'
+
+    @classmethod
+    def from_reader(cls, r: typing.BinaryIO):
+        o = NameAssoc()
+        o.ind = leb128.u.decode_reader(r)[0]
+        n = leb128.u.decode_reader(r)[0]
+        o.name = r.read(n).decode()
+        return o
+
+
+class FunctionNameSubsec:
+    def __init__(self):
+        self.size: int = 0x00
+        self.namemap: typing.List[NameAssoc] = []
+
+    def __repr__(self):
+        return f'function_name_subsec()'
+
+    @classmethod
+    def from_reader(cls, r: typing.BinaryIO):
+        o = FunctionNameSubsec()
+        o.size = leb128.u.decode_reader(r)[0]
+        # name
+        n = leb128.u.decode_reader(r)[0]
+        o.namemap = [NameAssoc.from_reader(r) for _ in range(n)]
+        return o
+
+
+class NameSubsec:
+    def __init__(self):
+        self.size: int = 0x00
+        self.data: bytearray = bytearray()
+
+    def __repr__(self):
+        return f'name_subsec()'
+
+    @classmethod
+    def from_reader(cls, r: typing.BinaryIO):
+        o = NameSubsec()
+        o.size = leb128.u.decode_reader(r)[0]
+        o.data = bytearray(r.read(o.size))
+        return o
+
+
 class Custom:
     # custom ::= name byte∗
     def __init__(self):
@@ -403,7 +456,17 @@ class Custom:
         o = Custom()
         n = leb128.u.decode_reader(r)[0]
         o.name = r.read(n).decode()
-        o.data = bytearray(r.read(-1))
+        if o.name == 'name':
+            o.data = []
+            for _ in range(3):
+                id = r.read(1)
+                if len(id) == 0:
+                    break
+                id = ord(id)
+                subsecs = {1: FunctionNameSubsec, }
+                o.data.append(subsecs.get(id, NameSubsec).from_reader(r))
+        else:
+            o.data = bytearray(r.read(-1))
         return o
 
 

@@ -477,7 +477,7 @@ class Configuration:
                 arity=len(function.type.rets.data),
             )
             self.set_frame(frame)
-            return self.exec()
+            return self.exec(is_body=True)
         if isinstance(function, HostFunc):
             r = function.hostcode(self, *[e.val() for e in function_args])
             l = len(function.type.rets.data)
@@ -488,11 +488,15 @@ class Configuration:
             return [Value.new(e, r[i]) for i, e in enumerate(function.type.rets.data)]
         raise Exception(f'pywasm: unknown function type: {function}')
 
-    def exec(self):
+    def exec(self, is_body=False):
         instruction_list = self.frame.expr.data
         instruction_list_len = len(instruction_list)
         while self.pc < instruction_list_len:
             i = instruction_list[self.pc]
+            if is_body:
+                assert i.offset != -1
+                # current function in monitor list
+                # if function_name in self.opts._safe_rule['prologue']
             if self.opts.cycle_limit > 0:
                 c = self.opts.cycle + self.opts.instruction_cycle_func(i)
                 if c > self.opts.cycle_limit:

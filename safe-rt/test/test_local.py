@@ -22,7 +22,7 @@ class TestLocal(unittest.TestCase):
         option.user_rule = rule
         runtime = pywasm.load('./local.wasm', opts=option)
         with self.assertRaisesRegex(Exception, 'hello = 0') as cm:
-            r = runtime.exec('main', [])
+            r = runtime.exec('main', [0,0])
 
     def test_local_store(self):
         rule = '''  {
@@ -36,7 +36,7 @@ class TestLocal(unittest.TestCase):
         option.user_rule = rule
         runtime = pywasm.load('./local.wasm', opts=option)
         with self.assertRaisesRegex(Exception, 'hello = 100') as cm:
-            r = runtime.exec('main', [])
+            r = runtime.exec('main', [0,0])
 
 
 if __name__ == '__main__':
