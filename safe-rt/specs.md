@@ -53,6 +53,24 @@ TODO 是否有global域的全局变量？
 
 同时指定名字和函数
 
+
+转换后：
+```json
+{
+    "location": {"func_name1": {
+        "location": {"fbreg": 8, "prologue": 5}, // ["local", 8]
+        "type": "<DIE>",
+        "check_func": "lambda x:x<0 and x<256",
+        "info": {
+            "function": "func_name1",
+            "name": "aint",
+            "decl_file": "xxx.c",
+            "decl_line": 4
+        }
+    },
+    "funcname2":{
+        // ...
+    }}
+}
 ```
-"location": { "function": "afunc", "name": "aint" },
-```
+设计考量：因为直接在指令执行时判断当前函数，方便直接通过`in`判断当前函数是不是在dict内，以及方便取出规则。

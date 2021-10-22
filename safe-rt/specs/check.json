@@ -1,8 +1,0 @@
-{
-    "global": [{
-        "location": { "index": 2 },
-        "type": "i32",
-        "check_func": "lambdax:x<0 and x<256",
-        "name": "aint"
-    }]
-}

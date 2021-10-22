@@ -220,6 +220,7 @@ class Instruction:
     def __init__(self):
         self.opcode: int = 0x00
         self.args: typing.List[typing.Any] = []
+        self.offset: int = -1
 
     def __repr__(self):
         return f'{instruction.opcode[self.opcode][0]} {self.args}'
@@ -648,11 +649,15 @@ class Expression:
         return position
 
     @classmethod
-    def from_reader(cls, r: typing.BinaryIO):
+    def from_reader(cls, r: typing.BinaryIO, set_offset=False):
         o = Expression()
         d = 1
         while True:
+            if set_offset:
+                offset = r.base_offset + r.tell()
             i = Instruction.from_reader(r)
+            if set_offset:
+                i.offset = offset
             if not i:
                 break
             o.data.append(i)
@@ -883,7 +888,7 @@ class Func:
         o = Func()
         n = leb128.u.decode_reader(r)[0]
         o.local_list = [Locals.from_reader(r) for i in range(n)]
-        o.expr = Expression.from_reader(r)
+        o.expr = Expression.from_reader(r, set_offset=True)
         return o
 
 
@@ -912,7 +917,9 @@ class Code:
     def from_reader(cls, r: typing.BinaryIO):
         o = Code()
         o.size = leb128.u.decode_reader(r)[0]
-        r = io.BytesIO(r.read(o.size))
+        base_offset = r.tell()
+        r = io.BufferedRandom(io.BytesIO(r.read(o.size)))
+        r.base_offset = base_offset
         o.func = Func.from_reader(r)
         return o
 
@@ -1129,7 +1136,8 @@ class Module:
                 log.debugln(element_section)
                 mod.element_list = element_section.data
             if section_id == convention.code_section:
-                code_section = CodeSection.from_reader(section_reader)
+                section_reader_r = io.BufferedRandom(section_reader)
+                code_section = CodeSection.from_reader(section_reader_r)
                 if len(function_section.data) != len(code_section.data):
                     raise Exception('pywasm: function and code section have inconsistent lengths')
                 mod.section_list.append(code_section)
