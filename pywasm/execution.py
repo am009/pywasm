@@ -493,10 +493,30 @@ class Configuration:
         instruction_list_len = len(instruction_list)
         while self.pc < instruction_list_len:
             i = instruction_list[self.pc]
+            
+            # safe_rt
             if is_body:
                 assert i.offset != -1
                 # current function in monitor list
-                # if function_name in self.opts._safe_rule['prologue']
+                if 'prologue' in self.opts._safe_rule and i.offset in self.opts._safe_rule['prologue']:
+                    fbreg_loc = self.opts._safe_rule['prologue'][i.offset]
+                    if fbreg_loc[0] == 'wasm-local':
+                        # get local
+                        fbreg = self.frame.local_list[fbreg_loc[1]].i32()
+                    elif fbreg_loc[0] == 'wasm-global':
+                        assert fbreg_loc[1] == 0 # __stack_pointer
+                        raise Exception('Not implemented: global sp based frame')
+                    else:
+                        log.fatalln(f"Error: unable to decode fbreg entry: {fbreg_loc}")
+                    rules = self.opts._safe_rule['local'][i.offset]
+                    for rule in rules:
+                        var_size = safety.get_size_by_type(rule['type'])
+                        if rule['location'][0] == 'fbreg':
+                            var_ptr = fbreg + rule['location'][1]
+                        else:
+                            raise Exception(f"UnImplemented {rule['location']}")
+                        self.opts._safe_rule['watch'].append((var_ptr, var_ptr + var_size, rule))
+                        
             if self.opts.cycle_limit > 0:
                 c = self.opts.cycle + self.opts.instruction_cycle_func(i)
                 if c > self.opts.cycle_limit:

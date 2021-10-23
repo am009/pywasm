@@ -20,8 +20,9 @@ class TestGlobal(unittest.TestCase):
         rule = json.loads(rule)
         option = pywasm.Option()
         option.user_rule = rule
+        module_path = os.path.join(self.dir, 'global.wasm')
         with self.assertRaisesRegex(Exception, 'b = 0') as cm:
-            pywasm.load('./global.wasm', opts=option)
+            pywasm.load(module_path, opts=option)
 
     def test_memory_store(self):
         rule = '''{
@@ -33,7 +34,8 @@ class TestGlobal(unittest.TestCase):
         rule = json.loads(rule)
         option = pywasm.Option()
         option.user_rule = rule
-        runtime = pywasm.load('./global.wasm', opts=option)
+        module_path = os.path.join(self.dir, 'global.wasm')
+        runtime = pywasm.load(module_path, opts=option)
         with self.assertRaisesRegex(Exception, 'b = 560') as cm:
             r = runtime.exec('mod', [560])
 

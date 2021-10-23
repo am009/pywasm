@@ -70,7 +70,6 @@ def convert_user_rule(module: binary.Module, user_rule):
             if val_die is None:
                 log.fatalln(
                     f"Error: Unable to find a variable matching location: {elem['location']}")
-            prologue_funcs.append(func_die)
 
             rule = {}
             line_prog = dwarf_info.line_program_for_CU(CU)
@@ -87,21 +86,41 @@ def convert_user_rule(module: binary.Module, user_rule):
             variable_loc = dwarf_expr_parser.parse_expr(loc_expr)
             where, rule['location'] = decode_location(variable_loc, type_die)
             # decode info in val_die
-            if func_name not in local_rules:
-                local_rules[func_name] = []
-            local_rules[func_name].append(rule)
+            prologue_end = get_prologue_end(line_prog, func_die)
+            if prologue_end is None:
+                log.fatalln(
+                    f"Error: Unable to find a prologue_end for function: {func_name}")
+            prologue_funcs.append((func_die, prologue_end))
+            if prologue_end not in local_rules:
+                local_rules[prologue_end] = []
+            local_rules[prologue_end].append(rule)
         # decode prologues for prologue_funcs
         prologue_dict = {}
-        for func_die in prologue_funcs:
-            func_name = func_die.attributes['DW_AT_name'].value.decode()
+        for func_die, prologue_end in prologue_funcs:
+            # func_name = func_die.attributes['DW_AT_name'].value.decode()
             loc_expr = func_die.attributes['DW_AT_frame_base'].value
             variable_loc = parse_dwarf_expr(dwarf_expr_parser, loc_expr)
-            assert variable_loc[1].op_name == 'DW_OP_stack_value'
             assert variable_loc[0].op_name == 'DW_OP_WASM_location'
-            prologue_dict[func_name] = variable_loc[0].args
+            assert variable_loc[1].op_name == 'DW_OP_stack_value'
+            prologue_dict[prologue_end] = variable_loc[0].args
         safe_rule['prologue'] = prologue_dict
         safe_rule['local'] = local_rules
+        safe_rule['watch'] = []
     return safe_rule
+
+
+def get_prologue_end(lineprog, func_die):
+    lowpc = func_die.attributes['DW_AT_low_pc'].value
+    highpc = func_die.attributes['DW_AT_high_pc'].value
+    for entry in lineprog.get_entries():
+        if (state := entry.state) is None:
+            continue
+        if not (lowpc <= state.address and state.address < highpc):
+            continue
+        # within function
+        if state.prologue_end:
+            return state.address
+    return None
 
 
 def get_size_by_type(die: DIE):
@@ -140,7 +159,7 @@ def parse_dwarf_expr(dwarf_expr_parser, expr):
     exps = []
     if expr[0] == 0xED:
         exps.append(DWARFExprOp(expr[1], 'DW_OP_WASM_location', [
-                    op2name[expr[1]], expr[2]]))
+                    op2name[expr[1]], expr[2]])) # TODO check wasm-global 0x1 uleb 0x3 u32 
         expr = expr[3:]
     exps += dwarf_expr_parser.parse_expr(expr)
     return exps
@@ -233,6 +252,21 @@ def post_memory_store(user_rule: Dict, memory, addr_begin, addr_end, is_init=Fal
                     log.println("After Memory initilization: ")
                 raise Exception(
                     f'Safe-rt: Runtime rule violation: Variable {rule["info"]["name"]} = {new_val} (defined at {rule["info"]["decl_file"]}:{rule["info"]["decl_line"]}) does not match rule "{rule["check_func"]}"')
+    
+    for watch in user_rule.get('watch', []):
+        if not(watch[0] < addr_end and addr_begin < watch[1]): # not overlap
+            continue
+        data = watch[2]
+        new_val = decode_by_type(data['type'], memory.data[watch[0]: watch[1]])
+        user_func = eval(data['check_func'])
+        if not user_func(new_val):
+            raise Exception(
+                f'Safe-rt: Runtime rule violation: Variable {data["info"]["name"]} = {new_val} in Function {data["info"]["function"]} (defined at {data["info"]["decl_file"]}:{data["info"]["decl_line"]}) does not match rule "{data["check_func"]}"')
+
+
+def get_sign_by_type(type: DIE):
+    if type.tag == 'DW_TAG_base_type':
+        return type.attributes['DW_AT_encoding'].value
 
 
 signed_decode = {1: num.LittleEndian.i8, 2: num.LittleEndian.i16,
@@ -248,7 +282,25 @@ def decode_by_type(type: DIE, data):
         signed, size = (
             type.attributes['DW_AT_encoding'].value, type.attributes['DW_AT_byte_size'].value)
         func = encoding2func[signed][size]
-        num = func(data)
-        return num
+        return func(data)
+    elif type.tag == 'DW_TAG_typedef':
+        return decode_by_type(type.get_DIE_from_attribute('DW_AT_type'), data)
+    # TODO add test
+    elif type.tag == 'DW_TAG_pointer_type':
+        func = num.LittleEndian.u32
+        return func(data)
+    elif type.tag == 'DW_TAG_array_type':
+        sub_type = type.get_DIE_from_attribute('DW_AT_type')
+        for child in type.iter_children():
+            if child.tag == 'DW_TAG_subrange_type':
+                ele_count = child.attributes['DW_AT_count'].value
+        size = len(data)
+        assert size % ele_count == 0
+        ele_size = size // ele_count
+        result = []
+        for ind in range(0, size, ele_size):
+            val = decode_by_type(sub_type, data[ind:ind+ele_size])
+            result.append(val)
+        return result
     else:
         raise Exception(f"Unimplemented type decode: {type.tag}")

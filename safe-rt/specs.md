@@ -63,14 +63,15 @@ TODO 是否有global域的全局变量？
 }
 ```
 转换后：
-```json
+```python
 {
+    "watch": [(addr, addr+size, rule)] # 动态随着函数执行添加的监控地址，一个rule的例子是下面"local"-95的list成员
     "prologue": {
-        "func_name1": ["wasm-local", 2],
-        "funcname2": ["wasm-local", 3]
+        95: ["wasm-local", 2], # 95 是func_name1的prologue结束的指令偏移
+        44: ["wasm-local", 3]  # func_name2
     },
-    "local": {"func_name1": [{
-        "location": ["fbreg", 8], // ["local", 8]
+    "local": {95: [{
+        "location": ["fbreg", 8], # ["local", 8]
         "type": "<DIE>",
         "check_func": "lambda x:x<0 and x<256",
         "info": {
@@ -80,11 +81,11 @@ TODO 是否有global域的全局变量？
             "decl_line": 4
         }
     }],
-    "funcname2":[{
+    44:[{
         // ...
     }]}
 }
 ```
 设计考量：因为直接在指令执行时判断当前函数，方便直接通过`in`判断当前函数是不是在dict内，以及方便取出规则。
 prologue每个函数只有一个，而local监控每个函数可能有多个，所以单独拿出来。
-runtime内部没有函数名，只有函数index
+runtime内部没有函数名，只有函数index。既然我们已经有了每个指令的偏移，不如直接用(lowpc, highpc)表示函数。更进一步，直接用prologue结束的指令偏移代表函数。

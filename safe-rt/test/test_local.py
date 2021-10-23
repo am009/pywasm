@@ -20,9 +20,11 @@ class TestLocal(unittest.TestCase):
         rule = json.loads(rule)
         option = pywasm.Option()
         option.user_rule = rule
-        runtime = pywasm.load('./local.wasm', opts=option)
-        with self.assertRaisesRegex(Exception, 'hello = 0') as cm:
+        module_path = os.path.join(self.dir, 'local.wasm')
+        runtime = pywasm.load(module_path, opts=option)
+        with self.assertRaisesRegex(Exception, 'hello = 0 in Function main') as cm:
             r = runtime.exec('main', [0,0])
+        # print(cm.exception)
 
     def test_local_store(self):
         rule = '''  {
@@ -34,10 +36,11 @@ class TestLocal(unittest.TestCase):
         rule = json.loads(rule)
         option = pywasm.Option()
         option.user_rule = rule
-        runtime = pywasm.load('./local.wasm', opts=option)
-        with self.assertRaisesRegex(Exception, 'hello = 100') as cm:
+        module_path = os.path.join(self.dir, 'local.wasm')
+        runtime = pywasm.load(module_path, opts=option)
+        with self.assertRaisesRegex(Exception, 'hello = 100 in Function main') as cm:
             r = runtime.exec('main', [0,0])
-
+        # print(cm.exception)
 
 if __name__ == '__main__':
     unittest.main()
