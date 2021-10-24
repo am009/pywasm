@@ -264,11 +264,6 @@ def post_memory_store(user_rule: Dict, memory, addr_begin, addr_end, is_init=Fal
                 f'Safe-rt: Runtime rule violation: Variable {data["info"]["name"]} = {new_val} in Function {data["info"]["function"]} (defined at {data["info"]["decl_file"]}:{data["info"]["decl_line"]}) does not match rule "{data["check_func"]}"')
 
 
-def get_sign_by_type(type: DIE):
-    if type.tag == 'DW_TAG_base_type':
-        return type.attributes['DW_AT_encoding'].value
-
-
 signed_decode = {1: num.LittleEndian.i8, 2: num.LittleEndian.i16,
                  4: num.LittleEndian.i32, 8: num.LittleEndian.i64}
 unsigned_decode = {1: num.LittleEndian.u8, 2: num.LittleEndian.u16,

@@ -1,0 +1,241 @@
+./array.wasm:	file format WASM
+
+.debug_abbrev contents:
+Abbrev table for offset: 0x00000000
+[1] DW_TAG_compile_unit	DW_CHILDREN_yes
+	DW_AT_producer	DW_FORM_strp
+	DW_AT_language	DW_FORM_data2
+	DW_AT_name	DW_FORM_strp
+	DW_AT_stmt_list	DW_FORM_sec_offset
+	DW_AT_comp_dir	DW_FORM_strp
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_ranges	DW_FORM_sec_offset
+
+[2] DW_TAG_variable	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_type	DW_FORM_ref4
+	DW_AT_external	DW_FORM_flag_present
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_location	DW_FORM_exprloc
+
+[3] DW_TAG_array_type	DW_CHILDREN_yes
+	DW_AT_type	DW_FORM_ref4
+
+[4] DW_TAG_subrange_type	DW_CHILDREN_no
+	DW_AT_type	DW_FORM_ref4
+	DW_AT_count	DW_FORM_data1
+
+[5] DW_TAG_base_type	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_encoding	DW_FORM_data1
+	DW_AT_byte_size	DW_FORM_data1
+
+[6] DW_TAG_base_type	DW_CHILDREN_no
+	DW_AT_name	DW_FORM_strp
+	DW_AT_byte_size	DW_FORM_data1
+	DW_AT_encoding	DW_FORM_data1
+
+[7] DW_TAG_subprogram	DW_CHILDREN_yes
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_prototyped	DW_FORM_flag_present
+	DW_AT_external	DW_FORM_flag_present
+
+[8] DW_TAG_formal_parameter	DW_CHILDREN_no
+	DW_AT_location	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+
+[9] DW_TAG_subprogram	DW_CHILDREN_yes
+	DW_AT_low_pc	DW_FORM_addr
+	DW_AT_high_pc	DW_FORM_data4
+	DW_AT_frame_base	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+	DW_AT_external	DW_FORM_flag_present
+
+[10] DW_TAG_variable	DW_CHILDREN_no
+	DW_AT_location	DW_FORM_exprloc
+	DW_AT_name	DW_FORM_strp
+	DW_AT_decl_file	DW_FORM_data1
+	DW_AT_decl_line	DW_FORM_data1
+	DW_AT_type	DW_FORM_ref4
+
+[11] DW_TAG_pointer_type	DW_CHILDREN_no
+	DW_AT_type	DW_FORM_ref4
+
+
+.debug_info contents:
+0x00000000: Compile Unit: length = 0x000000b7, format = DWARF32, version = 0x0004, abbr_offset = 0x0000, addr_size = 0x04 (next unit at 0x000000bb)
+
+0x0000000b: DW_TAG_compile_unit
+              DW_AT_producer	("Ubuntu clang version 12.0.0-3ubuntu1~21.04.1")
+              DW_AT_language	(DW_LANG_C99)
+              DW_AT_name	("array.c")
+              DW_AT_stmt_list	(0x00000000)
+              DW_AT_comp_dir	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/test")
+              DW_AT_low_pc	(0x00000000)
+              DW_AT_ranges	(0x00000000
+                 [0x00000005, 0x00000054)
+                 [0x00000056, 0x000000dd))
+
+0x00000026:   DW_TAG_variable
+                DW_AT_name	("arrg")
+                DW_AT_type	(0x00000037 "int[10]")
+                DW_AT_external	(true)
+                DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/test/./array.c")
+                DW_AT_decl_line	(2)
+                DW_AT_location	(DW_OP_addr 0x410)
+
+0x00000037:   DW_TAG_array_type
+                DW_AT_type	(0x00000043 "int")
+
+0x0000003c:     DW_TAG_subrange_type
+                  DW_AT_type	(0x0000004a "__ARRAY_SIZE_TYPE__")
+                  DW_AT_count	(0x0a)
+
+0x00000042:     NULL
+
+0x00000043:   DW_TAG_base_type
+                DW_AT_name	("int")
+                DW_AT_encoding	(DW_ATE_signed)
+                DW_AT_byte_size	(0x04)
+
+0x0000004a:   DW_TAG_base_type
+                DW_AT_name	("__ARRAY_SIZE_TYPE__")
+                DW_AT_byte_size	(0x08)
+                DW_AT_encoding	(DW_ATE_unsigned)
+
+0x00000051:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x00000005)
+                DW_AT_high_pc	(0x00000054)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x0 0x4, DW_OP_stack_value)
+                DW_AT_name	("mod")
+                DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/test/./array.c")
+                DW_AT_decl_line	(4)
+                DW_AT_prototyped	(true)
+                DW_AT_external	(true)
+
+0x00000065:     DW_TAG_formal_parameter
+                  DW_AT_location	(DW_OP_fbreg +12)
+                  DW_AT_name	("arr")
+                  DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/test/./array.c")
+                  DW_AT_decl_line	(4)
+                  DW_AT_type	(0x000000a9 "int*")
+
+0x00000073:     DW_TAG_formal_parameter
+                  DW_AT_location	(DW_OP_fbreg +8)
+                  DW_AT_name	("num")
+                  DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/test/./array.c")
+                  DW_AT_decl_line	(4)
+                  DW_AT_type	(0x00000043 "int")
+
+0x00000081:     NULL
+
+0x00000082:   DW_TAG_subprogram
+                DW_AT_low_pc	(0x00000056)
+                DW_AT_high_pc	(0x000000dd)
+                DW_AT_frame_base	(DW_OP_WASM_location 0x0 0x2, DW_OP_stack_value)
+                DW_AT_name	("main")
+                DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/test/./array.c")
+                DW_AT_decl_line	(9)
+                DW_AT_type	(0x00000043 "int")
+                DW_AT_external	(true)
+
+0x0000009a:     DW_TAG_variable
+                  DW_AT_location	(DW_OP_fbreg +0)
+                  DW_AT_name	("arr")
+                  DW_AT_decl_file	("/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/test/./array.c")
+                  DW_AT_decl_line	(10)
+                  DW_AT_type	(0x000000ae "int[4]")
+
+0x000000a8:     NULL
+
+0x000000a9:   DW_TAG_pointer_type
+                DW_AT_type	(0x00000043 "int")
+
+0x000000ae:   DW_TAG_array_type
+                DW_AT_type	(0x00000043 "int")
+
+0x000000b3:     DW_TAG_subrange_type
+                  DW_AT_type	(0x0000004a "__ARRAY_SIZE_TYPE__")
+                  DW_AT_count	(0x04)
+
+0x000000b9:     NULL
+
+0x000000ba:   NULL
+
+.debug_line contents:
+debug_line[0x00000000]
+Line table prologue:
+    total_length: 0x00000067
+          format: DWARF32
+         version: 4
+ prologue_length: 0x00000021
+ min_inst_length: 1
+max_ops_per_inst: 1
+ default_is_stmt: 1
+       line_base: -5
+      line_range: 14
+     opcode_base: 13
+standard_opcode_lengths[DW_LNS_copy] = 0
+standard_opcode_lengths[DW_LNS_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_advance_line] = 1
+standard_opcode_lengths[DW_LNS_set_file] = 1
+standard_opcode_lengths[DW_LNS_set_column] = 1
+standard_opcode_lengths[DW_LNS_negate_stmt] = 0
+standard_opcode_lengths[DW_LNS_set_basic_block] = 0
+standard_opcode_lengths[DW_LNS_const_add_pc] = 0
+standard_opcode_lengths[DW_LNS_fixed_advance_pc] = 1
+standard_opcode_lengths[DW_LNS_set_prologue_end] = 0
+standard_opcode_lengths[DW_LNS_set_epilogue_begin] = 0
+standard_opcode_lengths[DW_LNS_set_isa] = 1
+include_directories[  1] = "."
+file_names[  1]:
+           name: "array.c"
+      dir_index: 1
+       mod_time: 0x00000000
+         length: 0x00000000
+
+Address            Line   Column File   ISA Discriminator Flags
+------------------ ------ ------ ------ --- ------------- -------------
+0x0000000000000005      4      0      1   0             0  is_stmt
+0x0000000000000029      5     13      1   0             0  is_stmt prologue_end
+0x000000000000003d      6     14      1   0             0  is_stmt
+0x0000000000000044      6      5      1   0             0 
+0x000000000000004b      6     12      1   0             0 
+0x0000000000000052      7      1      1   0             0  is_stmt
+0x0000000000000054      7      1      1   0             0  is_stmt end_sequence
+0x0000000000000056      9      0      1   0             0  is_stmt
+0x0000000000000078     10      9      1   0             0  is_stmt prologue_end
+0x00000000000000af     11      9      1   0             0  is_stmt
+0x00000000000000b3     11      5      1   0             0 
+0x00000000000000c2     12      1      1   0             0  is_stmt
+0x00000000000000dd     12      1      1   0             0  is_stmt end_sequence
+
+
+.debug_str contents:
+0x00000000: "Ubuntu clang version 12.0.0-3ubuntu1~21.04.1"
+0x0000002d: "array.c"
+0x00000035: "/mnt/c/Users/warren/d/safe-wasm-rt/pywasm/safe-rt/test"
+0x0000006c: "arrg"
+0x00000071: "int"
+0x00000075: "__ARRAY_SIZE_TYPE__"
+0x00000089: "mod"
+0x0000008d: "main"
+0x00000092: "arr"
+0x00000096: "num"
+
+.debug_ranges contents:
+00000000 00000005 00000054
+00000000 00000056 000000dd
+00000000 <End of list>
