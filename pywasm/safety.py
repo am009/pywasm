@@ -1,5 +1,5 @@
 from typing import Dict, List
-from elftools.dwarf.constants import DW_ATE_signed, DW_ATE_signed_char, DW_ATE_unsigned
+from elftools.dwarf.constants import DW_ATE_signed, DW_ATE_signed_char, DW_ATE_unsigned, DW_ATE_unsigned_char, DW_ATE_signed_char
 from elftools.dwarf.die import DIE
 from elftools.dwarf.dwarfinfo import DWARFInfo
 from elftools.dwarf.dwarf_expr import DWARFExprParser, DWARFExprOp
@@ -159,7 +159,7 @@ def parse_dwarf_expr(dwarf_expr_parser, expr):
     exps = []
     if expr[0] == 0xED:
         exps.append(DWARFExprOp(expr[1], 'DW_OP_WASM_location', [
-                    op2name[expr[1]], expr[2]])) # TODO check wasm-global 0x1 uleb 0x3 u32 
+                    op2name[expr[1]], expr[2]]))  # TODO check wasm-global 0x1 uleb 0x3 u32
         expr = expr[3:]
     exps += dwarf_expr_parser.parse_expr(expr)
     return exps
@@ -252,9 +252,9 @@ def post_memory_store(user_rule: Dict, memory, addr_begin, addr_end, is_init=Fal
                     log.println("After Memory initilization: ")
                 raise Exception(
                     f'Safe-rt: Runtime rule violation: Variable {rule["info"]["name"]} = {new_val} (defined at {rule["info"]["decl_file"]}:{rule["info"]["decl_line"]}) does not match rule "{rule["check_func"]}"')
-    
+
     for watch in user_rule.get('watch', []):
-        if not(watch[0] < addr_end and addr_begin < watch[1]): # not overlap
+        if not(watch[0] < addr_end and addr_begin < watch[1]):  # not overlap
             continue
         data = watch[2]
         new_val = decode_by_type(data['type'], memory.data[watch[0]: watch[1]])
@@ -269,6 +269,7 @@ signed_decode = {1: num.LittleEndian.i8, 2: num.LittleEndian.i16,
 unsigned_decode = {1: num.LittleEndian.u8, 2: num.LittleEndian.u16,
                    4: num.LittleEndian.u32, 8: num.LittleEndian.u64}
 encoding2func = {DW_ATE_signed: signed_decode, DW_ATE_unsigned: unsigned_decode,
+                 DW_ATE_signed_char: signed_decode, DW_ATE_unsigned_char: unsigned_decode,
                  DW_ATE_signed_char: {1: num.LittleEndian.i8}}
 
 

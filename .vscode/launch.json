@@ -21,10 +21,10 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "localtest",
+            "name": "unsigned",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\safe-rt\\test\\test_local.py",
+            "program": "${workspaceFolder}\\safe-rt\\test\\test_unsigned.py",
             "cwd": "${workspaceFolder}\\safe-rt\\test",
             "console": "integratedTerminal"
         }        
