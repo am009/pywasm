@@ -7,3 +7,8 @@ int add(int a) {
 void mod(int new) {
     b = new;
 }
+
+int main() {
+    mod(128);
+    return 0;
+}

@@ -1,0 +1,6 @@
+{
+    "local": [{
+        "location": { "function": "main", "name": "hello" },
+        "check_func": "lambda x: x >= 0 and x < 99"
+    }]
+}

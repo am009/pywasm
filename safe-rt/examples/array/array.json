@@ -1,0 +1,10 @@
+{
+    "global": [{
+        "location": { "name": "arrg" },
+        "check_func": "lambda x: x[9] < 101"
+    }],
+    "local": [{
+        "location": { "function": "main", "name": "arr" },
+        "check_func": "lambda x: False not in [i < 100 for i in x]"
+    }]
+}

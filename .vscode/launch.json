@@ -27,6 +27,24 @@
             "program": "${workspaceFolder}\\safe-rt\\test\\test_unsigned.py",
             "cwd": "${workspaceFolder}\\safe-rt\\test",
             "console": "integratedTerminal"
-        }        
+        },
+        {
+            "name": "test decode to wat",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\safe-rt\\examples\\wasm2wat.py",
+            "args": ["./bubble_sort.wasm", "./bubble_sort.wasm.mywat"],
+            "cwd": "${workspaceFolder}\\safe-rt\\Wasm-samples\\c_samples.nosync\\emcc",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "example-local",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\safe-rt\\examples\\wrapper.py",
+            "args": [".\\local\\local.json", "main2"],
+            "cwd": "${workspaceFolder}\\safe-rt\\examples",
+            "console": "integratedTerminal"
+        }
     ]
 }

@@ -1,5 +1,10 @@
 .PHONY: all clean
-all: $(addsuffix .wasm, $(basename $(wildcard *.c))) $(addsuffix .wat, $(basename $(wildcard *.c))) $(addsuffix .wasm.dwarferdump, $(basename $(wildcard *.c))) $(addsuffix .wasm.dwarfdump, $(basename $(wildcard *.c)))
+# all: $(addsuffix .wasm, $(basename $(wildcard *.c))) $(addsuffix .wat, $(basename $(wildcard *.c))) $(addsuffix .wasm.dwarfdump, $(basename $(wildcard *.c)))
+# SRCS := $(wildcard *.c)
+SRCS := $(shell find $(SRCDIR) -name "*.c")
+
+all: $(SRCS:.c=.wasm) # $(SRCS:.c=.wat) $(SRCS:.c=.wasm.dwarfdump)
+
 
 %.wasm: %.c
 	# emcc ./$< -g -s EXPORTED_FUNCTIONS=_main -s ERROR_ON_UNDEFINED_SYMBOLS=0 -o ./$@
@@ -11,8 +16,5 @@ all: $(addsuffix .wasm, $(basename $(wildcard *.c))) $(addsuffix .wat, $(basenam
 %.wasm.dwarfdump: %.wasm
 	llvm-dwarfdump -all ./$< > ./$@
 
-%.wasm.dwarferdump: %.wasm
-	python3 ./dwarfer.py ./$< > ./$@
-
 clean:
-	rm *.wasm *.wat *.wasm.dwarfdump *.wasm.dwarferdump
+	rm *.wasm *.wat *.wasm.dwarfdump

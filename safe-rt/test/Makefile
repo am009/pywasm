@@ -1,5 +1,9 @@
 .PHONY: all clean
-all: $(addsuffix .wasm, $(basename $(wildcard *.c))) $(addsuffix .wat, $(basename $(wildcard *.c))) $(addsuffix .wasm.dwarfdump, $(basename $(wildcard *.c)))
+# all: $(addsuffix .wasm, $(basename $(wildcard *.c))) $(addsuffix .wat, $(basename $(wildcard *.c))) $(addsuffix .wasm.dwarfdump, $(basename $(wildcard *.c)))
+SRCS := $(wildcard *.c)
+
+all: $(SRCS:.c=.wasm) # $(SRCS:.c=.wat) $(SRCS:.c=.wat.fold) $(SRCS:.c=.wat.ssa)
+
 
 %.wasm: %.c
 	# emcc ./$< -g -s EXPORTED_FUNCTIONS=_main -s ERROR_ON_UNDEFINED_SYMBOLS=0 -o ./$@

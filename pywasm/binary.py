@@ -417,7 +417,7 @@ class FunctionNameSubsec:
         return f'function_name_subsec()'
 
     @classmethod
-    def from_reader(cls, r: typing.BinaryIO):
+    def from_reader(cls, r: typing.BinaryIO, id=-1):
         o = FunctionNameSubsec()
         o.size = leb128.u.decode_reader(r)[0]
         # name
@@ -428,6 +428,7 @@ class FunctionNameSubsec:
 
 class NameSubsec:
     def __init__(self):
+        self.id: int = -1
         self.size: int = 0x00
         self.data: bytearray = bytearray()
 
@@ -435,8 +436,9 @@ class NameSubsec:
         return f'name_subsec()'
 
     @classmethod
-    def from_reader(cls, r: typing.BinaryIO):
+    def from_reader(cls, r: typing.BinaryIO, id: int):
         o = NameSubsec()
+        o.id = id
         o.size = leb128.u.decode_reader(r)[0]
         o.data = bytearray(r.read(o.size))
         return o
@@ -458,13 +460,14 @@ class Custom:
         o.name = r.read(n).decode()
         if o.name == 'name':
             o.data = []
-            for _ in range(3):
+            # for _ in range(3):
+            while True:
                 id = r.read(1)
                 if len(id) == 0:
                     break
                 id = ord(id)
                 subsecs = {1: FunctionNameSubsec, }
-                o.data.append(subsecs.get(id, NameSubsec).from_reader(r))
+                o.data.append(subsecs.get(id, NameSubsec).from_reader(r, id))
         else:
             o.data = bytearray(r.read(-1))
         return o
@@ -1272,3 +1275,51 @@ class Module:
                         # debug_addr_sec=data[debug_addr_name],
                         # debug_str_offsets_sec=data[debug_str_offsets_name],
                         )
+
+def func_type_pretty_print(func_type: FunctionType):
+    return f"{func_type.args.data} => {func_type.rets.data}"
+
+def decode_function_inst(module: Module, func_ind: int, f2):
+    func_import_count = 0
+    for e in module.import_list:
+        if isinstance(e.desc, TypeIndex):
+            func_import_count += 1
+    for ind, function in enumerate(module.function_list):
+        if func_import_count + ind != func_ind:
+            continue
+        f2.write(f"type: {func_type_pretty_print(module.type_list[function.type_index])}\n")
+        f2.write(f"locals: {function.local_list}\n")
+        for inst in function.expr.data:
+            f2.write(f"{hex(inst.offset)} | {inst}\n")
+
+
+def wasm2wat(wasm_filename, out_filename):
+    with open(out_filename, 'w') as f2:
+        with open(wasm_filename, 'rb') as f:
+            module = Module.from_reader(f)
+            funcs = module.function_list
+            name_sec = None
+            for sec in module.section_list:
+                if isinstance(sec, CustomSection) and sec.custom.name == 'name':
+                    name_sec = sec.custom
+            if (name_sec is None):
+                raise "Error, no name section"
+            func_name_sec = None
+            for subsec in name_sec.data:
+                if isinstance(subsec, FunctionNameSubsec):
+                    func_name_sec = subsec
+            if func_name_sec is None:
+                raise "Error, no funcion name subsection"
+            name_map = func_name_sec.namemap
+            for name_assoc in name_map:
+                func_ind = name_assoc.ind
+                f2.write(f"function({func_ind}): {name_assoc.name}\n")
+                decode_function_inst(module, func_ind, f2)
+                f2.write(f"function({func_ind}): {name_assoc.name} end.\n\n")
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) < 3:
+        print(f"Usage: {sys.argv[0]} wasm_path out_path")
+        exit(1)
+    wasm2wat(sys.argv[1], sys.argv[2])

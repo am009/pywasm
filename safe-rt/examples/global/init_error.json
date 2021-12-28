@@ -1,0 +1,6 @@
+{
+    "global": [{
+        "location": { "name": "b" },
+        "check_func": "lambda x: x > 0"
+    }]
+}
